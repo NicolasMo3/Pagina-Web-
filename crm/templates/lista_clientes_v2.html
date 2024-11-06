@@ -1,0 +1,140 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Fondo gris claro */
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: auto; /* Centra la tabla */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra de la tabla */
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #dee2e6; /* Borde gris claro */
+        }
+        th {
+            background-color: #007bff; /* Color de fondo de los encabezados */
+            color: white; /* Color del texto */
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Color de fondo de filas pares */
+        }
+        tr:hover {
+            background-color: #e9ecef; /* Color al pasar el mouse */
+        }
+        .button {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #28a745; /* Color verde */
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .button:hover {
+            background-color: #218838; /* Color verde más oscuro al pasar el mouse */
+            transform: translateY(-2px); /* Efecto de elevación */
+        }
+        .no-data {
+            text-align: center; /* Centra el texto */
+            color: #777; /* Color gris para el texto */
+            font-style: italic; /* Estilo en cursiva */
+        }
+        .user-info {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .logout-button {
+            padding: 5px 10px; /* Botón más pequeño */
+            font-size: 14px; /* Tamaño de fuente más pequeño */
+            color: white;
+            background-color: #add8e6; /* Color azul claro */
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .logout-button:hover {
+            background-color: #87cefa; /* Color azul más oscuro al pasar el mouse */
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #777;
+            text-align: center; /* Centra el texto del pie de página */
+        }
+    </style>
+</head>
+<body>
+    <div class="user-info">
+        {% if user.is_authenticated %}
+            <span>Bienvenido, {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="logout-button">Cerrar sesión</a>
+        {% else %}
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+        {% endif %}
+    </div>
+
+    <h1>Lista de Clientes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>  <!-- Nueva columna para acciones -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.telefono }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="no-data">No hay clientes disponibles.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div style="text-align: center;">
+        <a href="{% url 'dashboard' %}" class="button">Volver al Dashboard</a> <!-- Cambia a la URL del dashboard -->
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Tu Empresa. Todos los derechos reservados.</p>
+    </div>
+
+</body>
+</html>

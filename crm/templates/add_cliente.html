@@ -1,0 +1,174 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir Cliente</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #c9dcf1 30%, #B1E6F7 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Encabezado con flexbox */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+        }
+        .header .welcome {
+            font-size: 16px;
+            color: #555;
+        }
+        .header .logout-button {
+            padding: 8px 15px;
+            font-size: 14px;
+            color: white;
+            background-color: #dc3545;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .header .logout-button:hover {
+            background-color: #c82333;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #28a745;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Campos de entrada */
+        label {
+            display: block;
+            font-weight: bold;
+            color: #555;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus {
+            border-color: #28a745;
+            outline: none;
+        }
+
+        /* Botón de envío */
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #28a745;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+    
+
+        /* Mensajes de alerta */
+        .alert {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .alert-success {
+            background-color: #28a745;
+        }
+        .alert-danger {
+            background-color: #dc3545;
+        }
+
+        /* Botón de regreso */
+        .back-button {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .back-button .button {
+            color: #28a745;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .back-button .button:hover {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="form-container">
+        <h1>Añadir Cliente</h1>
+
+        <!-- Mensajes de alerta -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Formulario para añadir cliente -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar Cliente</button>
+        </form>
+
+        <!-- Enlace para volver al dashboard -->
+        <div class="back-button">
+            <a href="{% url 'dashboard' %}" class="button">← Volver al Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

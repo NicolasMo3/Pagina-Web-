@@ -1,0 +1,149 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard del CRM</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Incluir Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #eef2f7 30%, #d1e8ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #28a745;
+            margin-bottom: 25px;
+            font-size: 28px;
+            transition: color 0.3s;
+        }
+        h1:hover {
+            color: #218838; /* Verde más oscuro al pasar el mouse */
+        }
+        p {
+            color: #555;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        /* Botones principales */
+        .button {
+            display: inline-block;
+            margin: 15px;
+            padding: 12px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #28a745;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .button:hover {
+            background-color: #218838; /* Verde más oscuro al pasar el mouse */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Información del usuario */
+        .user-info {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .user-info span {
+            margin-right: 10px;
+            color: #555;
+        }
+
+        /* Botón de cerrar sesión */
+        .logout-button {
+            display: inline-block;
+            padding: 8px 15px;
+            font-size: 14px;
+            color: white;
+            background-color: #dc3545; /* Rojo */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer; /* Cambiar a cursor pointer */
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .logout-button:hover {
+            background-color: #c82333; /* Rojo más oscuro */
+            transform: translateY(-2px); /* Efecto de elevación */
+        }
+
+        /* Pie de página */
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Información del usuario -->
+        <div class="user-info">
+            {% if user.is_authenticated %}
+                <span>Bienvenido, <strong>{{ user.username }}</strong></span>
+                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="button"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+            {% endif %}
+        </div>
+
+        <!-- Encabezado principal -->
+        <h1>Bienvenido al CRM</h1>
+        <p>Seleccione una opción para continuar:</p>
+
+        <!-- Botones de acción -->
+        <a href="{% url 'add_cliente' %}" class="button"><i class="fas fa-user-plus"></i> Añadir Cliente</a>
+        <a href="{% url 'lista_clientes' %}" class="button"><i class="fas fa-list"></i> Lista de Clientes</a>
+    </div>
+
+</body>
+</html>

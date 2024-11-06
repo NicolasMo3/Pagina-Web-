@@ -1,0 +1,185 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM - Gestión de Clientes</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e0f7fa 30%, #b2ebf2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
+            color: #333;
+            position: relative;
+        }
+        
+        /* Encabezado */
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: fixed; /* Fijo en la parte superior */
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Asegura que el encabezado esté por encima de otros elementos */
+        }
+        
+        /* Contenedor principal */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            margin-top: 80px; /* Espacio para el encabezado */
+            padding: 20px; /* Espaciado interno */
+            border: 1px solid #e1e5ea; /* Borde sutil */
+            position: relative;
+        }
+        
+        /* Sección principal */
+        .hero {
+            text-align: center;
+            margin-bottom: 20px; /* Espacio debajo del encabezado */
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            margin: 0;
+            color: #333;
+        }
+        .hero p {
+            color: #666;
+            margin: 10px 0 25px;
+            font-size: 1.2em;
+        }
+        
+        /* Botón de inicio de sesión */
+        .login-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-button:hover {
+            background-color: #218838; /* Verde más oscuro al pasar el mouse */
+            transform: translateY(-2px);
+        }
+
+        /* Sección de características */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 30px 10px; /* Espaciado en la sección de características */
+            background-color: #f9f9f9;
+            gap: 20px;
+            justify-content: center;
+        }
+        .feature {
+            flex: 1 1 240px; /* Asegura que las características tengan un tamaño flexible */
+            background-color: #e8f0fe;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .feature h3 {
+            margin: 10px 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .feature p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        /* Pie de página */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #999;
+            background-color: #f1f3f6;
+            border-top: 1px solid #e1e5ea;
+            margin-top: 20px;
+            width: 100%; /* Asegura que el pie de página ocupe todo el ancho */
+            position: absolute; /* Coloca el pie de página en la parte inferior */
+            bottom: 0;
+        }
+
+        /* Ajustes para móviles */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 1.8em; /* Tamaño de fuente más pequeño en móviles */
+            }
+            .hero p {
+                font-size: 1em; /* Tamaño de fuente más pequeño en móviles */
+            }
+            .login-button {
+                padding: 10px 20px; /* Tamaño más pequeño en móviles */
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Bienvenido al CRM de Gestión de Clientes</h2>
+    </header>
+    
+    <div class="container">
+        <section class="hero">
+            <h1>Controla y Administra tus Clientes</h1>
+            <p>Bienvenido al sistema de CRM que te permite gestionar de forma fácil y eficiente la información de tus clientes.</p>
+            <a href="{% url 'login' %}" class="login-button">Iniciar Sesión</a>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <h3>Base de Datos de Clientes</h3>
+                <p>Accede a una lista completa de clientes con información detallada y filtrada para tu comodidad.</p>
+            </div>
+            <div class="feature">
+                <h3>Registro de Nuevos Clientes</h3>
+                <p>Añade nuevos clientes a tu base de datos para mantener el contacto y realizar seguimientos.</p>
+            </div>
+            <div class="feature">
+                <h3>Historial de Contacto</h3>
+                <p>Consulta y gestiona el historial de interacciones con cada cliente en un solo lugar.</p>
+            </div>
+            <div class="feature">
+                <h3>Filtros y Búsquedas</h3>
+                <p>Encuentra rápidamente a tus clientes gracias a los filtros y opciones de búsqueda avanzadas.</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        &copy; 2024 CRM de Gestión de Clientes. Todos los derechos reservados.
+    </footer>
+</body>
+</html>
