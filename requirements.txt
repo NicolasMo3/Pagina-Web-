@@ -33,9 +33,8 @@ psutil==5.9.0  # Usa la versión estándar
 pure_eval==0.2.2  # Usa la versión estándar
 Pygments==2.16.1  # Usa la versión estándar
 PyMySQL==1.1.1
-python-dateutil==2.8.2  # Usa la versión estándar
+python-dateutil==3.9  # Usa la versión estándar
 pytz==2024.1
-pywin32==306
 pyzmq==24.0.1  # Usa la versión estándar
 six==1.16.0  # Usa la versión estándar
 sqlparse==0.5.1
