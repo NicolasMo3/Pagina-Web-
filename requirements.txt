@@ -8,7 +8,7 @@ Django==4.2.16
 django-grappelli==4.0.1
 et-xmlfile==1.1.0
 exceptiongroup==1.0.0  # Usa la versión estándar
-executing==2.3.0  # Usa la versión estándar
+executing  # Usa la versión estándar
 importlib_metadata==5.3.0  # Usa la versión estándar
 ipykernel==6.24.0  # Usa la versión estándar
 ipython==8.15.0  # Usa la versión estándar
