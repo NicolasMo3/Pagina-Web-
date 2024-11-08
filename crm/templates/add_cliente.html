@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %} <!-- Carga la librería para usar add_class -->
 
 <!DOCTYPE html>
 <html lang="es">
@@ -22,33 +23,6 @@
             position: relative;
             overflow: hidden;
         }
-        
-        /* Encabezado con flexbox */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto 20px auto;
-        }
-        .header .welcome {
-            font-size: 16px;
-            color: #555;
-        }
-        .header .logout-button {
-            padding: 8px 15px;
-            font-size: 14px;
-            color: white;
-            background-color: #dc3545;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        .header .logout-button:hover {
-            background-color: #c82333;
-        }
 
         .form-container {
             background-color: #fff;
@@ -58,15 +32,16 @@
             max-width: 600px;
             width: 100%;
             text-align: center;
+            max-height: 80vh;  /* Altura máxima para la caja del formulario */
+            overflow-y: auto;  /* Permite hacer scroll si el contenido excede el alto máximo */
         }
-        
+
         h1 {
             color: #28a745;
             margin-bottom: 20px;
             font-size: 24px;
         }
 
-        /* Campos de entrada */
         label {
             display: block;
             font-weight: bold;
@@ -75,9 +50,9 @@
             margin-bottom: 8px;
             text-align: left;
         }
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"] {
+        
+        /* Estilo de campos de formulario */
+        input[type="text"], input[type="email"], input[type="tel"], select, input[type="date"] {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
@@ -88,9 +63,7 @@
             color: #333;
             transition: border-color 0.3s;
         }
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="tel"]:focus {
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, select:focus, input[type="date"]:focus {
             border-color: #28a745;
             outline: none;
         }
@@ -113,62 +86,99 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-    
-
-        /* Mensajes de alerta */
-        .alert {
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 16px;
-        }
-        .alert-success {
-            background-color: #28a745;
-        }
-        .alert-danger {
-            background-color: #dc3545;
-        }
-
-        /* Botón de regreso */
-        .back-button {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .back-button .button {
-            color: #28a745;
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-        .back-button .button:hover {
-            color: #28a745;
-        }
     </style>
 </head>
 <body>
-    
-    <div class="form-container">
-        <h1>Añadir Cliente</h1>
 
-        <!-- Mensajes de alerta -->
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
+<div class="form-container">
+    <h1>Añadir Cliente</h1>
 
-        <!-- Formulario para añadir cliente -->
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Guardar Cliente</button>
-        </form>
+    <!-- Mensajes de alerta -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
 
-        <!-- Enlace para volver al dashboard -->
-        <div class="back-button">
-            <a href="{% url 'dashboard' %}" class="button">← Volver al Dashboard</a>
+    <!-- Formulario para añadir cliente -->
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Personaliza el campo 'nombre' -->
+        <div class="form-group">
+            <label for="{{ form.nombre.id_for_label }}">Cliente</label>
+            {{ form.nombre|add_class:"form-control" }}
         </div>
+        
+        <!-- Personaliza el campo 'email' -->
+        <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">Email</label>
+            {{ form.email|add_class:"form-control" }}
+        </div>
+
+        <!-- Personaliza el campo 'telefono' -->
+        <div class="form-group">
+            <label for="{{ form.telefono.id_for_label }}">Teléfono</label>
+            {{ form.telefono|add_class:"form-control" }}
+        </div>
+
+        <!-- Personaliza el campo 'empresa' -->
+        <div class="form-group">
+            <label for="{{ form.empresa.id_for_label }}">Empresa</label>
+            {{ form.empresa|add_class:"form-control" }}
+        </div>
+
+        <!-- Personaliza el campo 'estado' -->
+        <div class="form-group">
+            <label for="{{ form.estado.id_for_label }}">Estado</label>
+            {{ form.estado|add_class:"form-control" }}
+        </div>
+
+        <!-- Personaliza el campo 'operario' -->
+        <div class="form-group">
+            <label for="{{ form.operario.id_for_label }}">Operario</label>
+            {{ form.operario|add_class:"form-control" }}
+        </div>
+
+        <!-- Personaliza el campo 'producto' -->
+        <div class="form-group">
+            <label for="{{ form.producto.id_for_label }}">Producto</label>
+            {{ form.producto|add_class:"form-control" }}
+        </div>
+
+        <!-- Personaliza el campo 'sucursal' -->
+        <div class="form-group">
+            <label for="{{ form.sucursal.id_for_label }}">Sucursal</label>
+            {{ form.sucursal|add_class:"form-control" }}
+        </div>
+
+        <!-- Personaliza el campo 'fecha_in' (Fecha de Ingreso) -->
+        <div class="form-group">
+            <label for="{{ form.fecha_in.id_for_label }}">Fecha de Ingreso</label>
+            {{ form.fecha_in|add_class:"form-control" }}
+        </div>
+
+        <!-- Personaliza el campo 'fecha_sal' (Fecha de Salida) -->
+        <div class="form-group">
+            <label for="{{ form.fecha_sal.id_for_label }}">Fecha de Salida</label>
+            {{ form.fecha_sal|add_class:"form-control" }}
+        </div>
+
+        <!-- Personaliza el campo 'observacion' -->
+        <div class="form-group">
+            <label for="{{ form.observacion.id_for_label }}">Observación</label>
+            {{ form.observacion|add_class:"form-control" }}
+        </div>
+
+        <!-- Botón de envío -->
+        <button type="submit" class="btn btn-primary">Guardar Cliente</button>
+    </form>
+
+    <!-- Enlace para volver al dashboard -->
+    <div class="back-button">
+        <a href="{% url 'dashboard' %}" class="button">← Volver al Dashboard</a>
     </div>
+</div>
+
 </body>
 </html>

@@ -4,6 +4,7 @@ from .models import Cliente  # Asegúrate de importar el modelo Cliente
 from .forms import ClienteForm
 from django.contrib import messages
 from django.db.models import Q
+from datetime import datetime
 
 # Create your views here.
 def home(request):
@@ -12,29 +13,73 @@ def home(request):
 def profile_view(request):
     return redirect('/admin/')  # Redirige directamente a la URL del admin
 
-# @login_required
-# def lista_clientes(request):
-#     # Redirige a la URL de administración de clientes
-#     return redirect('/admin/crm/cliente/')
 
 # @login_required
 # def lista_clientes(request):
-#     clientes = Cliente.objects.all()
-#     return render(request, 'lista_clientes.html', {'clientes': clientes, 'request': request})
+#     query = request.GET.get('q', '')  # Recoge el término de búsqueda del parámetro 'q'
+#     if query:
+#         # Filtra clientes por nombre o email usando el término de búsqueda
+#         clientes = Cliente.objects.filter(
+#             Q(cliente__icontains=query) | Q(email__icontains=query)
+#         )
+#     else:
+#         # Si no hay término de búsqueda, muestra todos los clientes
+#         clientes = Cliente.objects.all()
+#     return render(request, 'lista_clientes.html', {'clientes': clientes, 'query': query})
 
-@login_required
 def lista_clientes(request):
-    query = request.GET.get('q', '')  # Recoge el término de búsqueda del parámetro 'q'
-    if query:
-        # Filtra clientes por nombre o email usando el término de búsqueda
-        clientes = Cliente.objects.filter(
-            Q(nombre__icontains=query) | Q(email__icontains=query)
-        )
-    else:
-        # Si no hay término de búsqueda, muestra todos los clientes
-        clientes = Cliente.objects.all()
-    return render(request, 'lista_clientes.html', {'clientes': clientes, 'query': query})
+    query = request.GET.get('q', '')
+    empresa = request.GET.get('empresa', '')
+    fecha_in = request.GET.get('fecha_in', '')
+    fecha_sal = request.GET.get('fecha_sal', '')
+    sucursal = request.GET.get('sucursal', '')
+    operario = request.GET.get('operario', '')
 
+    # Filtrado de los clientes según los parámetros
+    clientes = Cliente.objects.all()
+    if query:
+        clientes = clientes.filter(nombre__icontains=query)
+    
+    if empresa:
+        clientes = clientes.filter(empresa__icontains=empresa)
+    
+    if sucursal:
+        clientes = clientes.filter(sucursal=sucursal)
+    
+    if operario:
+        clientes = clientes.filter(operario=operario)
+    
+    # Filtro de fecha de ingreso (fecha_in)
+    if fecha_in:
+        try:
+            # Solo convierte si fecha_in tiene un valor
+            fecha_in_obj = datetime.strptime(fecha_in, "%Y-%m-%d").date()
+            clientes = clientes.filter(fecha_in__gte=fecha_in_obj)  # Filtra desde la fecha de ingreso
+        except ValueError:
+            pass  # Si la fecha no es válida, no hace nada
+    
+    # Filtro de fecha de salida (fecha_sal)
+    if fecha_sal:
+        try:
+            # Solo convierte si fecha_sal tiene un valor
+            fecha_sal_obj = datetime.strptime(fecha_sal, "%Y-%m-%d").date()
+            clientes = clientes.filter(fecha_sal__lte=fecha_sal_obj)  # Filtra hasta la fecha de salida
+        except ValueError:
+            pass  # Si la fecha no es válida, no hace nada
+    
+    # Pasar los valores de filtro al template
+    return render(request, 'lista_clientes.html', {
+        'clientes': clientes,
+        'query': query,
+        'query_empresa': empresa,
+        'query_fecha_in': fecha_in,
+        'query_fecha_sal': fecha_sal,
+        'query_sucursal': sucursal,
+        'query_operario': operario,
+        'empresas': Cliente.objects.values_list('empresa', flat=True).distinct(),
+        'sucursales': Cliente.objects.values_list('sucursal', flat=True).distinct(),
+        'operarios': Cliente.objects.values_list('operario', flat=True).distinct(),
+    })
 
 @login_required
 def dashboard(request):

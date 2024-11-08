@@ -4,5 +4,8 @@ from .models import Cliente
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        # fields = ['nombre', 'email', 'telefono']
-        fields = ['nombre', 'email', 'telefono', 'producto']
+        fields = '__all__'
+        widgets = {
+            'fecha_in': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'fecha_sal': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
+        }
