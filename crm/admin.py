@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cliente
+from .models import Cliente, PerfilUsuario
 
 class ClienteAdmin(admin.ModelAdmin):
     # Muestra estos campos en la lista
@@ -11,3 +11,12 @@ class ClienteAdmin(admin.ModelAdmin):
 
 # Registra el modelo con su clase personalizada de administración
 admin.site.register(Cliente, ClienteAdmin)
+
+@admin.register(PerfilUsuario)
+class PerfilUsuarioAdmin(admin.ModelAdmin):
+    list_display = ('user', 'get_encuesta_script')  # Muestra el usuario y su encuesta
+
+    def get_encuesta_script(self, obj):
+        return obj.encuesta_script if obj.encuesta_script else "No asignado"
+
+    get_encuesta_script.short_description = "Encuesta Script" 

@@ -5,6 +5,7 @@ from .forms import ClienteForm
 from django.contrib import messages
 from django.db.models import Q
 from datetime import datetime
+from .models import PerfilUsuario
 
 # Create your views here.
 def home(request):
@@ -104,3 +105,18 @@ def eliminar_cliente(request, cliente_id):
     cliente.delete()
     messages.success(request, 'Cliente eliminado exitosamente.')
     return redirect('lista_clientes')  # Redirige a la lista de clientes
+
+# def encuesta(request):
+#     return render(request, 'encuesta.html')
+
+def encuesta(request):
+    encuesta_script = None
+
+    if request.user.is_authenticated:
+        try:
+            perfil = PerfilUsuario.objects.get(user=request.user)
+            encuesta_script = perfil.encuesta_script  # Obtener el script de la base de datos
+        except PerfilUsuario.DoesNotExist:
+            pass  # Si el usuario no tiene encuesta asignada, se deja vacío
+
+    return render(request, 'encuesta.html', {'encuesta_script': encuesta_script})

@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.contrib.auth.models import User
 
 
 PRODUCTOS = [
@@ -226,4 +227,9 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nombre
     
-    
+class PerfilUsuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    encuesta_script = models.TextField(blank=True, null=True)  # Campo para el script
+
+    def __str__(self):
+        return self.user.username

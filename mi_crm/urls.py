@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views  # Importa las vistas de autenticación
 from crm import views
+from crm.views import encuesta
 
 
 urlpatterns = [
@@ -30,6 +31,6 @@ urlpatterns = [
     path('clientes/', views.lista_clientes, name='lista_clientes'),  
     path('clientes/add/', views.add_cliente, name='add_cliente'),  # Nueva URL para añadir cliente
     path('', views.home, name='logout'), 
-
+    path('encuesta/', encuesta, name='encuesta'),
 ]
 

@@ -171,3 +171,95 @@ tr:hover td {
 table td.fecha-col {
     width: 150px;  /* Ajusta el tamaño según sea necesario */
 }
+
+.custom-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    width: 240px;
+    height: 56px;
+    background-color: white;
+    border-radius: 16px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e3a8a; /* Azul corporativo oscuro */
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    padding-left: 16px;
+  }
+  
+  .custom-button:hover {
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  }
+  
+  .custom-button-bg {
+    background: linear-gradient(135deg, #3b82f6, #1e40af); /* Gradiente azul corporativo */
+    height: 44px;
+    width: 20%;
+    border-radius: 12px;
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: width 0.5s ease;
+  }
+  
+  .custom-button-text {
+    margin-left: 40px;
+    z-index: 2;
+    transition: transform 0.3s ease;
+    color: #1e3a8a;
+  }
+  
+  .custom-button:hover .custom-button-bg {
+    width: 200px;
+  }
+  
+  .custom-button:hover .custom-button-text {
+    transform: translateX(6px);
+    color: white;
+  }
+  
+  .back-button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .custom-button {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    background-color: #489cf0; /* Azul corporativo */
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .custom-button:hover {
+    background-color: #449bf1;
+    transform: translateY(-2px);
+  }
+  
+  .custom-button-bg {
+    background-color: #569fe7;
+    padding: 8px;
+    border-radius: 8px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custom-button-text {
+    font-size: 18px;
+  }
+  

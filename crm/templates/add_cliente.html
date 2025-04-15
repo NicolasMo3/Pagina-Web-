@@ -1,4 +1,4 @@
-{% load static %}
+<!-- {% load static %} -->
 {% load widget_tweaks %} <!-- Carga la librería para usar add_class -->
 
 <!DOCTYPE html>
@@ -7,7 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Añadir Cliente</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+
     <style>
         /* Estilos generales */
         body {
@@ -174,10 +177,24 @@
         <button type="submit" class="btn btn-primary">Guardar Cliente</button>
     </form>
 
-    <!-- Enlace para volver al dashboard -->
-    <div class="back-button">
-        <a href="{% url 'dashboard' %}" class="button">← Volver al Dashboard</a>
+    <!-- Botón estilizado para volver al Dashboard -->
+    <!-- HTML -->
+    <!-- <div class="back-button">
+        <a href="{% url 'dashboard' %}" class="custom-button">
+          <div class="custom-button-bg">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff" viewBox="0 0 24 24">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+          </div>
+          <span class="custom-button-text">Volver</span>
+        </a>
+    </div> -->
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'dashboard' %}" class="button">Volver al Dashboard</a>
     </div>
+      
+      
+    
 </div>
 
 </body>
