@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <!-- Incluir Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    
+
     <style>
         /* Estilos generales */
         body {
@@ -46,13 +46,13 @@
         }
 
         h1 {
-            color: #28a745;
+            color: #0c2340;
             margin-bottom: 25px;
             font-size: 28px;
             transition: color 0.3s;
         }
         h1:hover {
-            color: #218838; /* Verde más oscuro al pasar el mouse */
+            color: #2b63a7; /* Verde más oscuro al pasar el mouse */
         }
         p {
             color: #555;
@@ -67,7 +67,7 @@
             padding: 12px 30px;
             font-size: 18px;
             color: white;
-            background-color: #28a745;
+            background-color: #0c2340;
             border: none;
             border-radius: 8px;
             text-decoration: none;
@@ -75,7 +75,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .button:hover {
-            background-color: #218838; /* Verde más oscuro al pasar el mouse */
+            background-color: #2b63a7; /* Verde más oscuro al pasar el mouse */
             transform: translateY(-3px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
@@ -142,7 +142,9 @@
 
         <!-- Botones de acción -->
         <a href="{% url 'add_cliente' %}" class="button"><i class="fas fa-user-plus"></i> Añadir Cliente</a>
-        <a href="{% url 'lista_clientes' %}" class="button"><i class="fas fa-list"></i> Lista de Clientes</a>
+        <!--<a href="{% url 'lista_clientes' %}" class="button"><i class="fas fa-list"></i> Lista de Clientes</a>-->
+        <a href="{% url 'encuesta' %}" class="button"><i class="fas fa-poll"></i> Control Visitas</a>
+
     </div>
 
 </body>

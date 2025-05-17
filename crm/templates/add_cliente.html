@@ -37,7 +37,7 @@
         }
 
         h1 {
-            color: #28a745;
+            color: #0c2340;
             margin-bottom: 20px;
             font-size: 24px;
         }
@@ -50,7 +50,7 @@
             margin-bottom: 8px;
             text-align: left;
         }
-        
+
         /* Estilo de campos de formulario */
         input[type="text"], input[type="email"], input[type="tel"], select, input[type="date"] {
             width: 100%;
@@ -64,27 +64,28 @@
             transition: border-color 0.3s;
         }
         input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, select:focus, input[type="date"]:focus {
-            border-color: #28a745;
+            border-color: #0c2340;
             outline: none;
         }
 
-        /* Botón de envío */
-        button {
-            background-color: #28a745;
-            color: white;
+        /* Botones principales */
+        .button {
+            display: inline-block;
+            margin: 15px;
             padding: 12px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #0c2340;
             border: none;
             border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            width: 100%;
-            transition: background-color 0.3s, transform 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        button:hover {
-            background-color: #28a745;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        .button:hover {
+            background-color: #2b63a7; /* Azul más claro al pasar el mouse */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
@@ -109,7 +110,7 @@
             <label for="{{ form.nombre.id_for_label }}">Cliente</label>
             {{ form.nombre|add_class:"form-control" }}
         </div>
-        
+
         <!-- Personaliza el campo 'email' -->
         <div class="form-group">
             <label for="{{ form.email.id_for_label }}">Email</label>
@@ -136,8 +137,8 @@
 
         <!-- Personaliza el campo 'operario' -->
         <div class="form-group">
-            <label for="{{ form.operario.id_for_label }}">Operario</label>
-            {{ form.operario|add_class:"form-control" }}
+            <label for="{{ form.asesor.id_for_label }}">Asesor</label>
+            {{ form.asesor|add_class:"form-control" }}
         </div>
 
         <!-- Personaliza el campo 'producto' -->
@@ -159,10 +160,10 @@
         </div>
 
         <!-- Personaliza el campo 'fecha_sal' (Fecha de Salida) -->
-        <div class="form-group">
-            <label for="{{ form.fecha_sal.id_for_label }}">Fecha de Salida</label>
-            {{ form.fecha_sal|add_class:"form-control" }}
-        </div>
+        <!--<div class="form-group">-->
+        <!--    <label for="{{ form.fecha_sal.id_for_label }}">Fecha de Salida</label>-->
+        <!--    {{ form.fecha_sal|add_class:"form-control" }}-->
+        <!--</div>-->
 
         <!-- Personaliza el campo 'observacion' -->
         <div class="form-group">
@@ -171,12 +172,12 @@
         </div>
 
         <!-- Botón de envío -->
-        <button type="submit" class="btn btn-primary">Guardar Cliente</button>
+        <button type="submit" class="button">Guardar Cliente</button>
     </form>
-
     <!-- Enlace para volver al dashboard -->
-    <div class="back-button">
-        <a href="{% url 'dashboard' %}" class="button">← Volver al Dashboard</a>
+    <!--<div class="back-button">-->
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'dashboard' %}" class="button">Volver al Dashboard</a>
     </div>
 </div>
 

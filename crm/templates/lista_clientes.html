@@ -35,7 +35,7 @@
 
         h1 {
             text-align: center;
-            color: #28a745;
+            color: #0c2340;
             margin-bottom: 25px;
             font-size: 28px;
         }
@@ -63,13 +63,13 @@
             padding: 12px 20px;
             font-size: 16px;
             color: #fff;
-            background-color: #28a745;
+            background-color: #0c2340;
             border: none;
             border-radius: 8px;
             cursor: pointer;
         }
         .filters-container button:hover {
-            background-color: #218838;
+            background-color: #2b63a7;
         }
 
         /* Tabla de clientes */
@@ -89,7 +89,7 @@
         }
 
         th {
-            background-color: #28a745;
+            background-color: #2b63a7;
             color: #fff;
             font-weight: 600;
             text-transform: uppercase;
@@ -129,6 +129,26 @@
             width: 180px;  /* Aumenta el tamaño de las celdas de fecha */
         }
 
+        /* Botones principales */
+        .button {
+            display: inline-block;
+            margin: 15px;
+            padding: 12px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #0c2340;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .button:hover {
+            background-color: #2b63a7; /* Azul más claro al pasar el mouse */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
     </style>
 </head>
 <body>
@@ -147,7 +167,7 @@
                 </select>
 
                 <input type="date" name="fecha_in" value="{{ fecha_in }}">
-                <input type="date" name="fecha_sal" value="{{ fecha_sal }}">
+                <!--<input type="date" name="fecha_sal" value="{{ fecha_sal }}">-->
 
                 <select name="sucursal">
                     <option value="">Sucursal</option>
@@ -156,10 +176,10 @@
                     {% endfor %}
                 </select>
 
-                <select name="operario">
-                    <option value="">Operario</option>
-                    {% for operario in operarios %}
-                        <option value="{{ operario }}" {% if operario == query_operario %}selected{% endif %}>{{ operario }}</option>
+                <select name="asesor">
+                    <option value="">Asesor</option>
+                    {% for asesor in asesores %}
+                        <option value="{{ asesor }}" {% if asesor == query_asesor %}selected{% endif %}>{{ asesor }}</option>
                     {% endfor %}
                 </select>
 
@@ -182,11 +202,11 @@
                         <th>Teléfono</th>
                         <th>Empresa</th>
                         <th>Estado</th>
-                        <th>Operario</th>
+                        <th>Asesor</th>
                         <th>Producto</th>
                         <th>Sucursal</th>
                         <th>Fecha de Ingreso</th>
-                        <th>Fecha de Salida</th>
+                        <!--<th>Fecha de Salida</th>-->
                         <th>Observación</th>
                     </tr>
                 </thead>
@@ -199,11 +219,11 @@
                             <td>{{ cliente.telefono }}</td>
                             <td>{{ cliente.empresa }}</td>
                             <td>{{ cliente.estado }}</td>
-                            <td>{{ cliente.operario }}</td>
+                            <td>{{ cliente.asesor }}</td>
                             <td>{{ cliente.get_producto_display }}</td>
                             <td>{{ cliente.sucursal }}</td>
                             <td>{{ cliente.fecha_in|date:"d-m-Y" }}</td>
-                            <td>{{ cliente.fecha_sal|date:"d-m-Y" }}</td>
+                            <!--<td>{{ cliente.fecha_sal|date:"d-m-Y" }}</td>-->
                             <td>{{ cliente.observacion }}</td>
                         </tr>
                     {% empty %}
@@ -217,7 +237,13 @@
 
         <!-- Navegación -->
         <div class="navigation">
-        <a href="{% url 'dashboard' %}">Volver al Dashboard</a>
+        <!--<a href="{% url 'dashboard' %}">Volver al Dashboard</a>-->
+
+
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="{% url 'dashboard' %}" class="button">Volver al Dashboard</a>
+            </div>
+
         </div>
 
     </div>

@@ -5,7 +5,8 @@ class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = '__all__'
+        exclude = ['fecha_sal']
         widgets = {
             'fecha_in': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'fecha_sal': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
+            # 'fecha_sal': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
         }

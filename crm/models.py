@@ -1,6 +1,6 @@
 from django.db import models
 import datetime
-
+from django.contrib.auth.models import User
 
 PRODUCTOS = [
     "POLY TALLADO",
@@ -216,14 +216,20 @@ class Cliente(models.Model):
     telefono = models.CharField(max_length=10)
     empresa = models.CharField(max_length=100, null=True, blank=True)
     estado = models.CharField(max_length=32, choices=[(estado, estado) for estado in ESTADOS], blank=True)
-    operario = models.CharField(max_length=100, null=True, blank=True)
-    producto = models.CharField(max_length=255, choices=[(producto, producto) for producto in PRODUCTOS])
+    asesor = models.CharField(max_length=100, null=True, blank=True)
+    # producto = models.CharField(max_length=255, choices=[(producto, producto) for producto in PRODUCTOS])
+    producto = models.CharField(max_length=255)
     sucursal = models.CharField(max_length=32, choices=[(sucursal, sucursal) for sucursal in SUCURSALES], blank=True)
     fecha_in = models.DateField("Fecha de Ingreso", default=datetime.date.today)
-    fecha_sal = models.DateField("Fecha de Salida", default=datetime.date.today)
+    # fecha_sal = models.DateField("Fecha de Salida", default=datetime.date.today)
     observacion = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.nombre
-    
-    
+
+class PerfilUsuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    encuesta_script = models.TextField(blank=True, null=True)  # Campo para el script
+
+    def __str__(self):
+        return self.user.username
